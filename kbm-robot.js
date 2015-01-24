@@ -220,8 +220,9 @@ function kbmRobot() {
     var notStartedErr = "ERR: kbm-robot not started.";
 
     var pub = {
-        startJar: function() {
-            var jarPath = path.join(__dirname, "robot.jar");
+        startJar: function(JRE_ver) {
+            JRE_ver = JRE_ver || 6;
+            var jarPath = path.join(__dirname, "java", "robot" + JRE_ver + ".jar");
             if (!keyPresser) {
                 if (!fs.existsSync(jarPath)) {
                     throw new Error("ERR: Can't find robat.jar. Expected Path: " + jarPath);
