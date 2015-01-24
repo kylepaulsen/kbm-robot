@@ -1,3 +1,5 @@
+var fs = require("fs");
+var path = require("path");
 var spawn = require("child_process").spawn;
 var Promise = require("promise");
 
@@ -219,14 +221,16 @@ function kbmRobot() {
 
     var pub = {
         startJar: function() {
+            var jarPath = path.join(__dirname, "robot.jar");
             if (!keyPresser) {
+                if (!fs.existsSync(jarPath)) {
+                    throw new Error("ERR: Can't find robat.jar. Expected Path: " + jarPath);
+                }
                 try {
-                    keyPresser = spawn("java", ["-jar", "robot.jar"]);
-                    /*
-                    keyPresser.stdout.on('data', function (data) {
-                        console.log("buttonPresser.jar: " + data);
-                    });
-                    */
+                    keyPresser = spawn("java", ["-jar", jarPath]);
+                    // keyPresser.stdout.on('data', function (data) {
+                    //     console.log("buttonPresser.jar: " + data);
+                    // });
                 } catch(e) {
                     throw new Error("ERR: kbm-robot couldn't start robot.jar");
                 }

@@ -22,14 +22,14 @@ public class KBMRobot {
         }
 
         // Make a key string to key id map
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap<String, Object>();
         for (Field f : KeyEvent.class.getDeclaredFields()) {
             try {
                 if (java.lang.reflect.Modifier.isStatic(f.getModifiers())) {
                     f.setAccessible(true);
                     map.put(f.getName(), f.get(null));
                 }
-            } catch (IllegalArgumentException | IllegalAccessException ex) {
+            } catch (Exception ex) {
                 //ex.printStackTrace();
                 System.out.print("Failed to map key.");
             }
@@ -67,11 +67,11 @@ public class KBMRobot {
                             if (stringParts[0].equalsIgnoreCase("D") || stringParts[0].equalsIgnoreCase("P")
                                     || stringParts[0].equalsIgnoreCase("PRESS")) {
                                 System.out.print("Press " + stringParts[1]);
-                                r.keyPress((int) key);
+                                r.keyPress((Integer) key);
                             } else if (stringParts[0].equalsIgnoreCase("U") || stringParts[0].equalsIgnoreCase("R")
                                     || stringParts[0].equalsIgnoreCase("RELEASE")) {
                                 System.out.print("Release " + stringParts[1]);
-                                r.keyRelease((int) key);
+                                r.keyRelease((Integer) key);
                             }
                         }
                     }
