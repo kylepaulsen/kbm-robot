@@ -51,6 +51,7 @@ function kbmRobot() {
         ";": "VK_SEMICOLON",
         "'": "VK_QUOTE",
         "ENTER": "VK_ENTER",
+        "\n": "VK_ENTER",
         "KP_4": "VK_NUMPAD4",
         "KP_5": "VK_NUMPAD5",
         "KP_6": "VK_NUMPAD6",
@@ -217,7 +218,7 @@ function kbmRobot() {
         return Promise.resolve();
     };
 
-    var notStartedErr = "ERR: kbm-robot not started.";
+    var notStartedErr = "ERR: kbm-robot not started. ( Call .startJar() ).";
 
     var pub = {
         startJar: function(JRE_ver) {
