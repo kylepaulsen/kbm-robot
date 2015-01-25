@@ -34,7 +34,7 @@ var robot = require("kbm-robot");
 All functions except for startJar and stopJar are chainable. You must chain them and then call .go() to have things happen.
 
   - robot**.startJar(version)**
-    - version - (String, optional, default is "6") - argument to specify which jar you want to run. Currently there is a Java 6 and Java 7 jar. Valid values are "6" or "7". If you are having trouble getting something to work, try using .startJar("7"); (You will need JRE 7 to run the 7 jar.)
+    - version - (String, optional, default is "6") - argument to specify which jar you want to run. Currently there is a Java 6 and Java 7 jar. Valid values are "6" or "7". If you are having trouble getting something to work, try using .startJar("7"); (You will need java >= 1.7 to run the 7 jar. Type java -version in a console to see your version).
     - This function must be called before any other api functions are used.
   - robot**.stopJar()**
     - Stops the child process that is running the jar.
