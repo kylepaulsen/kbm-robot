@@ -226,7 +226,8 @@ function kbmRobot() {
             var jarPath = path.join(__dirname, "java", "robot" + JRE_ver + ".jar");
             if (!keyPresser) {
                 if (!fs.existsSync(jarPath)) {
-                    throw new Error("ERR: Can't find robat.jar. Expected Path: " + jarPath);
+                    throw new Error("ERR: Can't find robot" + JRE_ver +
+                        ".jar. Expected Path: " + jarPath);
                 }
                 try {
                     keyPresser = spawn("java", ["-jar", jarPath]);
@@ -234,10 +235,12 @@ function kbmRobot() {
                     //     console.log("buttonPresser.jar: " + data);
                     // });
                 } catch(e) {
-                    throw new Error("ERR: kbm-robot couldn't start robot.jar");
+                    throw new Error("ERR: kbm-robot couldn't start robot" + JRE_ver +
+                        ".jar");
                 }
             } else {
-                throw new Error("ERR: kbm-robot robot.jar already started.");
+                throw new Error("ERR: kbm-robot robot" + JRE_ver +
+                    ".jar already started.");
             }
         },
         stopJar: function() {
@@ -246,7 +249,8 @@ function kbmRobot() {
                     keyPresser.kill("SIGINT");
                 }, 200);
             } else {
-                throw new Error("ERR: kbm-robot robot.jar not started.");
+                throw new Error("ERR: kbm-robot robot" + JRE_ver +
+                        ".jar not started.");
             }
         },
         press: function(key) {

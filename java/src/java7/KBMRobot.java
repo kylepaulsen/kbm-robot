@@ -22,14 +22,14 @@ public class KBMRobot {
         }
 
         // Make a key string to key id map
-        Map<String, Object> map = new HashMap<String, Object>();
+        Map<String, Object> map = new HashMap<>();
         for (Field f : KeyEvent.class.getDeclaredFields()) {
             try {
                 if (java.lang.reflect.Modifier.isStatic(f.getModifiers())) {
                     f.setAccessible(true);
                     map.put(f.getName(), f.get(null));
                 }
-            } catch (Exception ex) {
+            } catch (IllegalArgumentException | IllegalAccessException ex) {
                 //ex.printStackTrace();
                 System.out.print("Failed to map key.");
             }
@@ -48,9 +48,9 @@ public class KBMRobot {
                     } else if (stringParts[0].equalsIgnoreCase("MP") || stringParts[0].equalsIgnoreCase("MD")
                             || stringParts[0].equalsIgnoreCase("MOUSEPRESS")) {
                         int press = 0;
-                        press |= stringParts[1].indexOf("1") > -1 ? 1024 : 0;
-                        press |= stringParts[1].indexOf("2") > -1 ? 2048 : 0;
-                        press |= stringParts[1].indexOf("3") > -1 ? 4096 : 0;
+                        press |= stringParts[1].indexOf("1") > -1 ? KeyEvent.BUTTON1_DOWN_MASK : 0;
+                        press |= stringParts[1].indexOf("2") > -1 ? KeyEvent.BUTTON2_DOWN_MASK : 0;
+                        press |= stringParts[1].indexOf("3") > -1 ? KeyEvent.BUTTON3_DOWN_MASK : 0;
                         r.mousePress(press);
                     } else if (stringParts[0].equalsIgnoreCase("MR") || stringParts[0].equalsIgnoreCase("MU")
                             || stringParts[0].equalsIgnoreCase("MOUSERELEASE")) {
@@ -67,11 +67,11 @@ public class KBMRobot {
                             if (stringParts[0].equalsIgnoreCase("D") || stringParts[0].equalsIgnoreCase("P")
                                     || stringParts[0].equalsIgnoreCase("PRESS")) {
                                 System.out.print("Press " + stringParts[1]);
-                                r.keyPress((Integer) key);
+                                r.keyPress((int) key);
                             } else if (stringParts[0].equalsIgnoreCase("U") || stringParts[0].equalsIgnoreCase("R")
                                     || stringParts[0].equalsIgnoreCase("RELEASE")) {
                                 System.out.print("Release " + stringParts[1]);
-                                r.keyRelease((Integer) key);
+                                r.keyRelease((int) key);
                             }
                         }
                     }
