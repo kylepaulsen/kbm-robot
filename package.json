@@ -1,6 +1,6 @@
 {
   "name": "kbm-robot",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "A module to help you emulate system wide keyboard and mouse actions.",
   "main": "kbm-robot.js",
   "scripts": {
@@ -13,6 +13,7 @@
     "robot"
   ],
   "author": "Kyle Paulsen <kyle.a.paulsen@gmail.com> (http://www.kylepaulsen.com/)",
+  "repository": "https://github.com/kylepaulsen/kbm-robot",
   "license": "MIT",
   "dependencies": {
     "promise": "^6.1.0"
