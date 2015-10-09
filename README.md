@@ -98,6 +98,7 @@ However this library also supplies many "shortcut" strings to get your robot typ
 "F12"
 "CTRL"
 "META"
+"SUPER"
 "ALT"
 " "
 "SPACE"

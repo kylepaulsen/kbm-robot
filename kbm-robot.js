@@ -65,6 +65,9 @@ function kbmRobot() {
         "KP_3": "VK_NUMPAD3",
         "CTRL": "VK_CONTROL",
         "META": "VK_META",
+        // TODO: need to have the jar convert VK_META to VK_WINDOWS.
+        // Did meta never work on windows?
+        "SUPER": "VK_META",
         "ALT": "VK_ALT",
         " ": "VK_SPACE",
         "SPACE": "VK_SPACE",
@@ -229,28 +232,17 @@ function kbmRobot() {
                     throw new Error("ERR: Can't find robot" + JRE_ver +
                         ".jar. Expected Path: " + jarPath);
                 }
-                try {
-                    keyPresser = spawn("java", ["-jar", jarPath]);
-                    // keyPresser.stdout.on('data', function (data) {
-                    //     console.log("buttonPresser.jar: " + data);
-                    // });
-                } catch(e) {
-                    throw new Error("ERR: kbm-robot couldn't start robot" + JRE_ver +
-                        ".jar");
-                }
+                keyPresser = spawn("java", ["-jar", jarPath]);
             } else {
-                throw new Error("ERR: kbm-robot robot" + JRE_ver +
-                    ".jar already started.");
+                throw new Error("ERR: A kbm-robot jar has already started.");
             }
         },
         stopJar: function() {
             if (keyPresser) {
-                setTimeout(function() {
-                    keyPresser.kill("SIGINT");
-                }, 200);
+                keyPresser.kill("SIGINT");
+                keyPresser = null;
             } else {
-                throw new Error("ERR: kbm-robot robot" + JRE_ver +
-                        ".jar not started.");
+                throw new Error("ERR: A kbm-robot jar is not started");
             }
         },
         press: function(key) {
@@ -334,6 +326,14 @@ function kbmRobot() {
             if (!keyPresser) {
                 throw new Error(notStartedErr);
             }
+            // Add in small delay to end of chain so
+            // that the jar has enough time to execute
+            // the final command before it is (probably) killed.
+            // May need to refactor this later for an "all done" command
+            // sent to the jar which in turn waits for the jar to
+            // send a message back so we can kill it after it's truly done.
+            pub.sleep(200);
+
             var p = Promise.resolve();
             actionArr.forEach(function(action) {
                 p = p.then(function() {
