@@ -8,6 +8,8 @@ var keyPresser;
 function kbmRobot() {
     "use strict";
 
+    var DEBUG = false;
+
     var easyKeys = {
         "ESC": "VK_ESCAPE",
         "F1": "VK_F1",
@@ -233,6 +235,26 @@ function kbmRobot() {
                         ".jar. Expected Path: " + jarPath);
                 }
                 keyPresser = spawn("java", ["-jar", jarPath]);
+
+                // Need to hook up these handlers to prevent the
+                // jar from crashing sometimes.
+                keyPresser.stdout.on('data', function(data) {
+                    if (DEBUG) {
+                        console.log('stdout: ' + data);
+                    }
+                });
+
+                keyPresser.stderr.on('data', function(data) {
+                    if (DEBUG) {
+                        console.log('stderr: ' + data);
+                    }
+                });
+
+                keyPresser.on('close', function(data) {
+                    if (DEBUG) {
+                        console.log('child process exited with code: ' + code);
+                    }
+                });
             } else {
                 throw new Error("ERR: A kbm-robot jar has already started.");
             }
