@@ -1,6 +1,6 @@
 {
   "name": "kbm-robot",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A module to help you emulate system wide keyboard and mouse actions.",
   "main": "kbm-robot.js",
   "scripts": {
