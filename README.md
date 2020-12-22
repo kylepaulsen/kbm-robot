@@ -61,13 +61,13 @@ All functions except for startJar and stopJar are chainable. You must chain them
     - Y - (int, required) - The Y coordinate on your screen.
     - Tells the robot to move your mouse to the specified location.
   - robot**.mousePress(buttons)**
-    - buttons (String, required) - A string containing 1, 2, or 3 or any combination of those. 1 is the left mouse button, 2 is the right mouse button and 3 is the middle mouse button. (Ex. "13" press mouse 1 and mouse 3).
+    - buttons (String, required) - A string containing 1, 2, or 3 or any combination of those. 1 is the left mouse button, 2 is the middle mouse button and 3 is the right mouse button. (Ex. "13" press mouse 1 and mouse 3).
     - Tells the robot to press (and hold) the specified mouse buttons.
   - robot**.mouseRelease(buttons)**
-    - buttons (String, required) - A string containing 1, 2, or 3 or any combination of those. 1 is the left mouse button, 2 is the right mouse button and 3 is the middle mouse button. (Ex. "13" press mouse 1 and mouse 3).
+    - buttons (String, required) - A string containing 1, 2, or 3 or any combination of those. 1 is the left mouse button, 2 is the middle mouse button and 3 is the right mouse button. (Ex. "13" press mouse 1 and mouse 3).
     - Tells the robot to release the specified mouse buttons.
   - robot**.mouseClick(buttons, delay)**
-    - buttons (String, required) - A string containing 1, 2, or 3 or any combination of those. 1 is the left mouse button, 2 is the right mouse button and 3 is the middle mouse button. (Ex. "13" press mouse 1 and mouse 3).
+    - buttons (String, required) - A string containing 1, 2, or 3 or any combination of those. 1 is the left mouse button, 2 is the middle mouse button and 3 is the right mouse button. (Ex. "13" press mouse 1 and mouse 3).
     - delay (int, optional, default is 0) - How long to wait after the mouse buttons are pressed.
     - Tells the robot to click the specified mouse buttons.
   - robot**.mouseWheel(amount)**
