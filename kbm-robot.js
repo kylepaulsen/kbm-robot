@@ -234,7 +234,7 @@ function kbmRobot() {
                     throw new Error("ERR: Can't find robot" + JRE_ver +
                         ".jar. Expected Path: " + jarPath);
                 }
-                keyPresser = spawn("java", ["-jar", jarPath]);
+                keyPresser = spawn("java", ["-jar", jarPath], {windowsHide:true});
 
                 // Need to hook up these handlers to prevent the
                 // jar from crashing sometimes.
